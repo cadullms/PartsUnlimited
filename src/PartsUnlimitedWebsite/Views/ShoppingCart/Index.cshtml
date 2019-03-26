@@ -24,7 +24,8 @@
                 if (recordToDelete !== '') {
 
                     // Start telemetry timer for post
-                    window.appInsights.startTrackEvent('Remove.Item.' + recordToDelete);
+                    if (window.appInsights !== undefined)
+                        window.appInsights.startTrackEvent('Remove.Item.' + recordToDelete);
 
                     // Perform the ajax post
                     var success = function (data) {
@@ -52,7 +53,8 @@
                         $('#cart-status').text('Cart (' + data.cartCount + ')');
                         $('#cart-count').text(data.cartCount);
 
-                        window.appInsights.stopTrackEvent('Remove.Item.' + recordToDelete);
+                        if (window.appInsights !== undefined)
+                            window.appInsights.stopTrackEvent('Remove.Item.' + recordToDelete);
                     };
 
                     $.ajax({
